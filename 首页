@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background: #0a0a1a;
+      color: #d4af37;
+      font-family: "STKaiti", "KaiTi", serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 { font-size: 2em; letter-spacing: 0.3em; margin-bottom: 40px; }
+    input {
+      background: transparent;
+      border: 1px solid #d4af37;
+      color: #d4af37;
+      padding: 8px 16px;
+      font-size: 1.2em;
+      font-family: inherit;
+      text-align: center;
+      margin: 10px 0;
+      width: 240px;
+    }
+    button {
+      margin-top: 30px;
+      background: #d4af37;
+      color: #0a0a1a;
+      border: none;
+      padding: 10px 32px;
+      font-size: 1.1em;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 0.2em;
+    }
+    label { font-size: 0.9em; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <h1>了不起的宗门</h1>
+  <label>宗门名称</label>
+  <input id="sectName" placeholder="请赐名" />
+  <label>掌门道号</label>
+  <input id="masterName" placeholder="请赐名" />
+  <button onclick="startGame()">开创宗门</button>
+
+  <script>
+    function startGame() {
+      const sect = document.getElementById('sectName').value.trim();
+      const master = document.getElementById('masterName').value.trim();
+      if (!sect || !master) {
+        alert('请填写宗门名称与掌门道号');
+        return;
+      }
+      // 把值写回ST输入框并发送
+      const input = window.parent.document.getElementById('send_textarea');
+      if (input) {
+        input.value = `/宗门名:${sect} /掌门名:${master}`;
+        // 触发ST的发送
+        const sendBtn = window.parent.document.getElementById('send_but');
+        if (sendBtn) sendBtn.click();
+      }
+    }
+  </script>
+</body>
+</html>
